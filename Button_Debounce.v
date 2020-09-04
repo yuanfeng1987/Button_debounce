@@ -1,8 +1,7 @@
-module Button_Debounce_Test(input wire i_Btn,
-							  input wire i_Rst_n,
-							  input wire i_Clock50MHz,
-							  output wire o_High_Pulse,
-							  output wire [7:0] CNT_out);
+module Button_Debounce_Test(  input wire i_Btn,
+			      input wire i_Rst_n,
+			      input wire i_Clock50MHz,     // input clock is 50MHz, PLL will generate 10MHz clock
+			      output wire o_High_Pulse);
 							  
 	reg [17:0] Counter_clk;
 	reg in_q1, in_q2, in_q3;
@@ -43,7 +42,7 @@ module Button_Debounce_Test(input wire i_Btn,
 					begin
 						Counter_clk<=Counter_clk+1'b1;
 						if (Counter_clk>18'b11_0000_1101_0100_1111)    //18'b11_0000_1101_0100_1111=200k+15
-							Counter_clk<=18'b11_0000_1101_0100_0010;    //18'b11_0000_1101_0100_0011=200k+3
+							Counter_clk<=18'b11_0000_1101_0100_0011;    //18'b11_0000_1101_0100_0011=200k+3
 					end
 			end
 	end
@@ -66,7 +65,6 @@ module Button_Debounce_Test(input wire i_Btn,
 			
 	end
 	assign o_High_Pulse= ((!out_q2) & out_q1);
-	assign CNT_out=Counter_clk[7:0];
 	
 	Test_clk10MHz	Test_clk10MHz_inst (
 	.inclk0 ( i_Clock50MHz ),
