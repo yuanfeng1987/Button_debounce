@@ -1,4 +1,4 @@
-module I2C_Module_Test(input wire i_Btn,
+module Button_Debounce_Test(input wire i_Btn,
 							  input wire i_Rst_n,
 							  input wire i_Clock50MHz,
 							  output wire o_High_Pulse,
